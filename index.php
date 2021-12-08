@@ -12,7 +12,22 @@
 </head>
 <body>
 <?php require_once 'process.php';?>
-<div class="container">
+
+
+
+<?php  if (isset($_SESSION['message'])):  ?>
+    <div class="alert alert-<?php echo $_SESSION['msg_type']; ?>">
+   
+        <?php
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+        ?>
+     </div>
+  <?php endif; ?>
+
+
+
+
 <?php 
     //CONNECT TO DB
 
@@ -22,6 +37,8 @@
         ") or die($mysqli->error);
     //pre_r($result);
 ?>
+
+<div class="container">
     <div class = "row justify-content-center">
         <table class="table">
             <thead>
@@ -36,15 +53,19 @@
                         <td><?php echo $row['name'];?></td>
                         <td><?php echo $row['location'];?></td>
                         <td>
-                            <a href="index.php?edit=<?php echo $row['id']; ?>" class="btn btn-info">EDIT</a>
-                            <a href="index.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">DELETE</a>
+                            <a 
+                            href="index.php?edit=<?php echo $row['id']; ?>"
+                            class="btn btn-info">
+                              EDIT
+                            </a>
+                            <a href="process.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">DELETE</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
         </table>
     </div>
-<?php
 
+<?php
     //FETCH_ASSOC PARA LER AS LINHAS DA DB, CADA CHAMADA LÊ A LINHA SEGUINTE
     // pre_r($result->fetch_assoc());
     // pre_r($result->fetch_assoc());
@@ -61,20 +82,29 @@
 <div class="row justify-content-center">
 
     <form action="process.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
     
 
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control" placeholder="Enter your name">
+                <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" placeholder="Enter your name" required>
             </div>
 
             <div class="form-group">
                 <label>Location</label>
-                <input type="text" name="location" class="form-control" placeholder="Enter your location">
+                <input type="text" name="location" class="form-control" value="<?php echo $location; ?>" placeholder="Enter your location" required>
             </div>
 
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-primary">Save</button>
+
+                <?php
+                    if ($update == true):
+                ?>
+                    <button type="submit" name="update" class="btn btn-primary">Update</button>
+                <?php else: ?>
+                    <button type="submit" name="save" class="btn btn-primary">Save</button>
+                <?php endif; ?>
+   
             </div>
 
     </form>
