@@ -15,29 +15,12 @@
 
 <?php 
     //CONNECT TO DB
-    /*
+
     $mysqli = new mysqli('localhost','root','','crud') or die(mysqli_error($mysqli));
     $result = $mysqli->query("
         SELECT * FROM data
         ") or die($mysqli->error);
 
-    //PRINT DB
-    pre_r($result);
-    function pre_r($array) {
-        echo'<pre>';
-        print_r($array);
-        echo '<pre>';
-    }
-*/
-    $mysqli = new mysqli('
-    ec2-52-213-119-221.eu-west-1.compute.amazonaws.com',
-    'ojvnfniustyfec',
-    '58619d89d7edd7cedaf8d450ff8238b5a217992d70648a1e84ec8bc3e2644609',
-    'd2me54gh9lqq73','5432') or die(mysqli_error($mysqli));
-    print_r($mysqli);
-    $result = $mysqli->query("
-        SELECT * FROM data
-        ") or die($mysqli->error);
 
     //PRINT DB
     pre_r($result);
