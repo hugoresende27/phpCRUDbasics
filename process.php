@@ -23,3 +23,8 @@ if(isset($_GET['delete'])){
     <h1>ELIMINAR ? </h1>
     <a href="confirma_delete.php"> SIM </a>
     <a href="index.php"> NÂO </a>
+<?php
+
+}
+?>
+
