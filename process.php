@@ -13,18 +13,19 @@ if (isset($_POST['save'])){
     $mysqli->query("
         INSERT INTO data (name,location) 
         VALUES ('$name','$local')") or die($mysqli->error);
+    echo "Registo adicionado!";
+    Header('location:index.php');
 }
 
 //BOTÃO DELETE
 if(isset($_GET['delete'])){
     $id=$_GET['delete'];
 
-?>
-    <h1>ELIMINAR ? </h1>
-    <a href="confirma_delete.php"> SIM </a>
-    <a href="index.php"> NÂO </a>
-<?php
+    $mysqli->query("
+    DELETE FROM data WHERE id=$id
+") or die($mysqli->error);
 
+echo "Registo eliminado!";
 }
-?>
+
 
