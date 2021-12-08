@@ -15,6 +15,7 @@
 
 <?php 
     //CONNECT TO DB
+    /*
     $mysqli = new mysqli('localhost','root','','crud') or die(mysqli_error($mysqli));
     $result = $mysqli->query("
         SELECT * FROM data
@@ -27,7 +28,7 @@
         print_r($array);
         echo '<pre>';
     }
-
+*/
 ?>
 
 <div class="row justify-content-center">
