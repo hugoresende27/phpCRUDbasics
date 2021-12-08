@@ -12,7 +12,7 @@
 </head>
 <body>
 <?php require_once 'process.php';?>
-
+<div class="container">
 <?php 
     //CONNECT TO DB
 
@@ -20,14 +20,41 @@
     $result = $mysqli->query("
         SELECT * FROM data
         ") or die($mysqli->error);
+    //pre_r($result);
+?>
+    <div class = "row justify-content-center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+                <?php while($row= $result->fetch_assoc()):?>
+                    <tr>
+                        <td><?php echo $row['name'];?></td>
+                        <td><?php echo $row['location'];?></td>
+                        <td>
+                            <a href="index.php?edit=<?php echo $row['id']; ?>" class="btn btn-info">EDIT</a>
+                            <a href="index.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">DELETE</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+        </table>
+    </div>
+<?php
 
+    //FETCH_ASSOC PARA LER AS LINHAS DA DB, CADA CHAMADA LÊ A LINHA SEGUINTE
+    // pre_r($result->fetch_assoc());
+    // pre_r($result->fetch_assoc());
+    // pre_r($result->fetch_assoc());
 
     //PRINT DB
-    pre_r($result);
     function pre_r($array) {
         echo'<pre>';
         print_r($array);
-        echo '<pre>';
+        echo '</pre>';
     }
 ?>
 
@@ -38,12 +65,12 @@
 
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control" value="Enter your name">
+                <input type="text" name="name" class="form-control" placeholder="Enter your name">
             </div>
 
             <div class="form-group">
                 <label>Location</label>
-                <input type="text" name="location" class="form-control" value="Enter your location">
+                <input type="text" name="location" class="form-control" placeholder="Enter your location">
             </div>
 
             <div class="form-group">
@@ -51,6 +78,7 @@
             </div>
 
     </form>
+    </div>
 
 </div>  
 </body>
